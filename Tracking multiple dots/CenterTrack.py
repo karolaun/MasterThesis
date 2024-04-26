@@ -111,6 +111,7 @@ while True:
     # Calculate centers of red dots
     red_dot_centers = calculate_centers(contours_red)
 
+    idx1 = 0
     # Print the centers of green dots
     print("Centers of Green Dots:")
     for idx, center in enumerate(green_dot_centers):
@@ -118,7 +119,9 @@ while True:
         file3 = open("./Week13/CamRecLiner/ResCamRec/resgreen2.txt","a")
         print(str(idx),":",center[0],",",center[1],file=file3)
         file3.close()
+        idx1 += idx
 
+    idx2 = 0
     # Print the centers of red dots
     print("\nCenters of Red Dots:")
     for idx, center in enumerate(red_dot_centers):
@@ -126,7 +129,35 @@ while True:
         file = open("./Week13/CamRecLiner/ResCamRec/resred2.txt","a")
         print(str(idx),":",center[0],",",center[1],file=file)
         file.close()
+        idx2 += idx
 
+    def extract_coordinates(input_file, index,colour):
+        output_file = f'Week13/CamRecLiner/ResCamRec/{colour}/res{index}.txt'
+        with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+            for line in infile:
+                parts = line.strip().split(':')
+                if len(parts) == 2:
+                    idx, coordinates = parts
+                    if idx.strip() == str(index):
+                        outfile.write(coordinates.strip() + '\n')
+
+
+    # Main function to process the input file
+    def mainred(input_file):
+        for i in range(idx2):
+            extract_coordinates(input_file, i, "Red")
+            
+    def maingreen(input_file):
+        for j in range(idx1):
+            extract_coordinates(input_file,j,"Green")
+
+    if __name__ == "__main__":
+        input_file = './Week13/CamRecLiner/ResCamRec/resred2.txt'
+        mainred(input_file)
+        input_file1 = "./Week13/CamRecLiner/ResCamRec/resgreen2.txt'"
+        maingreen(input_file1)
+
+        
     # Optionally, visualize the centers on the image
     for center in green_dot_centers:
         cv2.circle(frame, center, 3, (0, 255, 0), -1)  # Draw a green circle at each green dot center
