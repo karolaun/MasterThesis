@@ -11,6 +11,7 @@ This is of the better results, but is quite consistent in the video. However, so
 ![frame9](https://github.com/karolaun/MasterThesis/assets/166374797/0bf7d04d-de4e-423c-bbde-87383f217386)
 
 The plots of this first video shows this more clearly:
+
 ![Green](https://github.com/karolaun/MasterThesis/assets/166374797/67f15a10-7ac2-451e-b523-ab7634fdbc5a)
 ![Red](https://github.com/karolaun/MasterThesis/assets/166374797/56d134ae-f192-43ed-b841-eeb8d6a04de2)
 
