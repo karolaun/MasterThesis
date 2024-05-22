@@ -92,29 +92,27 @@ while True:
         for m in range(len(corners)):
             results = './Results/restest' + str(m) + '.txt'
             if index == 1:
-                filemode = "w"
+                file2 = open(results, "w")
+                print(corners[m][0], ",", corners[m][1], file=file2)   
             else:
-                filemode = "a"
+                file2 = open(results, "a")
  
-            # Write current corner's coordinates to the file
-            with open(results, filemode) as file2:
-                print(corners[m][0], ",", corners[m][1], file=file2)
- 
-            if m > 0:
-                # Open the file again to read the last line
+                # Open the file to read the last line
                 file2 = open(results, "r")
                 lines = file2.readlines()
                 file2.close()
  
-                if len(lines) > 1:
-                    prev_line = lines[-2].strip()
-                    prev_value1, prev_value2 = map(float, prev_line.split(','))
+                if len(lines) > 0:
+                    prev_line = lines[-1].strip()
+                    prev_value1,prev_value2 = prev_line.split(",")
+                    prev_value1 = float(prev_value1)
+                    prev_value2 = float(prev_value2)
  
                     # Define the limit
-                    limit = 10 # Adjust this as needed
+                    limit = float(10) # Adjust this as needed
  
                     # Check if the current corner's coordinates are within the limit of the previous coordinates
-                    if abs(corners[m][0] - prev_value1) <= limit and abs(corners[m][1] - prev_value2) <= limit:
+                    if (abs(corners[m][0] - prev_value1) <= limit) and (abs(corners[m][1] - prev_value2) <= limit):
                         print("Both current values are within the limit.")
                         # Open the file to append the current corner's coordinates
                         file2 = open(results, "a")
@@ -123,9 +121,10 @@ while True:
                     else:
                         print("Values are not within limits")
                 else:
-                    # If it's the first corner, just print a message
                     print("First corner detected. No comparison made.")
-            # Close the file
+ 
+        # Close the file after the loop finishes
+        if file2:
             file2.close()
  
         key = cv.waitKey(1) & 0xFF

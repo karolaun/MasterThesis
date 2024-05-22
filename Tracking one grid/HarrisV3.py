@@ -50,16 +50,17 @@ while True:
     frame = imutils.resize(frame,width=600)
     gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
      
-    dst = cv.cornerHarris(gray,2,3,0.04)
+    dst = cv.cornerHarris(gray,2,3,0.07)
     dst = cv.dilate(dst,None)
     ret, dst = cv.threshold(dst,0.01*dst.max(),255,0)
     dst = np.uint8(dst)
+    cv.imshow("dst",dst)
  
     if ret:
         ret,labels, stats, centroids = cv.connectedComponentsWithStats(dst)
         #Define the criteria to stop and refine the corners
         criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 100, 0.001)
-        corners = cv.cornerSubPix(gray,np.float32(centroids),(5,5),(-1,-1),criteria)    
+        corners = cv.cornerSubPix(gray,np.float32(centroids),(50,50),(-1,-1),criteria)    
         #Drawing the corners
         res = np.hstack((centroids,corners))
         res = np.int0(res)
@@ -80,6 +81,8 @@ while True:
         #Saving frames to folder
         name = './VideoSave2/frame' + str(index) + '.jpg'
         cv.imwrite(name, frame)
+        threshimg = "./Thresh/frame" + str(index) + ".jpg"
+        cv.imwrite(threshimg,dst)
         index+=1
  
         #Show frames and give option to exit
@@ -109,7 +112,7 @@ while True:
                     prev_value2 = float(prev_value2)
  
                     # Define the limit
-                    limit = float(10) # Adjust this as needed
+                    limit = float(50) # Adjust this as needed
  
                     # Check if the current corner's coordinates are within the limit of the previous coordinates
                     if (abs(corners[m][0] - prev_value1) <= limit) and (abs(corners[m][1] - prev_value2) <= limit):
