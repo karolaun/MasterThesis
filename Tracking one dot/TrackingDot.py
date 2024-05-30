@@ -1,3 +1,7 @@
+## Disclaimer ##
+#This code is greatly inspired by the code written by Adrian Rosebrock here: https://pyimagesearch.com/2015/09/21/opencv-track-object-movement/
+#This code is then further developed in all following codes. The program is also made using open source codes from the OpenCV library as linked in thesis
+
 
 #Import packages
 from imutils.video import VideoStream
