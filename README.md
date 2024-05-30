@@ -4,4 +4,4 @@ The Thesis will explore new data collection methods for lower-limb prostheses, w
 
 Some codes are heavily influenced by other GitHub pages, and these pages and creators will be linked in cases where this is relevant. 
 
-The codes are put in the repository to illustrate the process of developing a program, not to claim as the authors own work in its entirety.
+The codes are put in the repository to illustrate the process of developing a program, not to claim as the author's own work in its entirety.
