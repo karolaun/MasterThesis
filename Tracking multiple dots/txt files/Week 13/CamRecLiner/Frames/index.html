@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        img {
+            max-width: 80%;
+            max-height: 80%;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <img id="currentImage">
+
+    <script>
+        let currentIndex = 0; // Starting index of the first image
+        const totalImages = 74; // Total number of images in the folder
+
+        const loadImage = () => {
+            const imageUrl = `images/frame${currentIndex}.jpg`;
+            document.getElementById('currentImage').src = imageUrl;
+        };
+
+        const showNextImage = () => {
+            currentIndex = currentIndex % totalImages + 1;
+            loadImage();
+        };
+
+        const showPreviousImage = () => {
+            currentIndex = (currentIndex - 2 + totalImages) % totalImages + 1;
+            loadImage();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadImage();
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (event.key === 'ArrowLeft') {
+                    showPreviousImage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
